@@ -20,7 +20,16 @@
             android:layout_height="200dp"
             android:layout_alignTop="@+id/appname"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/baseline_note_24" />
+            android:src="@drawable/baseline_notes_24" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Just Notes"
+            android:textSize="40dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"  />
 
     </LinearLayout>
 

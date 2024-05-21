@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+                            if (signInAccountTask.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), "Login Success!", Toast.LENGTH_SHORT).show();
                             } else {
                                 // Log the error or display a more informative error message

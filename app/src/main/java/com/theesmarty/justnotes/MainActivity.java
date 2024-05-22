@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
             signIn();
         }
         else {
-            Toast.makeText(getApplicationContext(), "Login Success!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Login Success!\nWelcome "+user.getDisplayName(), Toast.LENGTH_SHORT).show();
         }
+        //Add the functionality of the app from here
+
     }
 
 
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Login Success!", Toast.LENGTH_SHORT).show();
                             } else {
                                 // Log the error or display a more informative error message
-                                Toast.makeText(getApplicationContext(), "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Error Login!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

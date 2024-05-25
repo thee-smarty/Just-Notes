@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
             Intent in = new Intent(MainActivity.this, NoteActivity.class);
             startActivity(in);
         });
-        //Add the functionality of the app from here
+
+        // TODO: 5/25/24 Add Note adding Functionality
+        // TODO: 5/25/24 Retrieve the notes from database and display on screen
 
     }
 

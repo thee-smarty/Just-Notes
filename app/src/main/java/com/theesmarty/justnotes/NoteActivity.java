@@ -15,6 +15,8 @@ public class NoteActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
         content = findViewById(R.id.content);
 
+        // TODO: 5/25/24  Add functionality of adding the title and content together
+
 
     }
 }

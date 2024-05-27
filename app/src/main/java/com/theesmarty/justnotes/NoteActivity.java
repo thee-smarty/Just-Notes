@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+// TODO: 5/27/24 It saves every character instance as a note make everynote saving structure when closing the note for making it as one
 // TODO: 5/26/24 Note auto save working remove the toasts its messy
 
 public class NoteActivity extends AppCompatActivity {

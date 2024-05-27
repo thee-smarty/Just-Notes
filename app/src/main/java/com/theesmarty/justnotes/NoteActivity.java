@@ -78,7 +78,7 @@ public class NoteActivity extends AppCompatActivity {
             note.put("content", noteContent);
             note.put("noteId", System.currentTimeMillis());
 
-            firestore.collection("users").document(userId).collection("notes").document(noteId)
+            firestore.collection("JustNotes").document(userId).collection("notes").document(noteId)
                     .set(note)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {

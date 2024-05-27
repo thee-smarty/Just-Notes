@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-// TODO: 5/26/24 Test and check the functionality of this activity
+// TODO: 5/26/24 Note auto save working remove the toasts its messy
 
 public class NoteActivity extends AppCompatActivity {
     EditText title, content;

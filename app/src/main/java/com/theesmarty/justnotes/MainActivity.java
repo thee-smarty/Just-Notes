@@ -56,9 +56,14 @@ public class MainActivity extends AppCompatActivity {
             Intent in = new Intent(MainActivity.this, NoteActivity.class);
             startActivity(in);
         });
-
-        // TODO: 5/25/24 Add Note adding Functionality
         // TODO: 5/25/24 Retrieve the notes from database and display on screen
+
+        // TODO: 5/28/24 when we click the note for update or access
+        // Code to start NoteActivity for editing an existing note
+        //Intent intent = new Intent(this, NoteActivity.class);
+        //intent.putExtra("noteId", existingNoteId); // Pass the existing note ID
+        //startActivity(intent);
+
 
     }
 

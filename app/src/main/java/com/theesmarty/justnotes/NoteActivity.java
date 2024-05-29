@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+// TODO: 5/29/24 Test the functionality of the code
 public class NoteActivity extends AppCompatActivity {
     EditText title, content;
     private FirebaseFirestore firestore;

@@ -25,6 +25,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/title"
         android:layout_above="@+id/add"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:padding="8dp"
         android:visibility="invisible"
         />
 

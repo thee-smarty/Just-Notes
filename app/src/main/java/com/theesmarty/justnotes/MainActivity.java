@@ -27,8 +27,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: 5/29/24 Check the functionalilthy of the note list and view 
-
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private GoogleSignInClient googleSignInClient;
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         info = findViewById(R.id.info);
 
         noteList = new ArrayList<>();
-        noteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_2, noteList);
+        noteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, noteList);
         list.setAdapter(noteAdapter);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -83,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -127,6 +126,15 @@ public class MainActivity extends AppCompatActivity {
                             noteList.add(noteTitle);
                         }
                         noteAdapter.notifyDataSetChanged();
+
+                        if (noteList.size() > 0) {
+                            list.setVisibility(ListView.VISIBLE);
+                            info.setVisibility(TextView.GONE);
+                        } else {
+                            list.setVisibility(ListView.GONE);
+                            info.setVisibility(TextView.VISIBLE);
+                        }
+
                     } else {
                         Toast.makeText(MainActivity.this, "Failed to load notes.", Toast.LENGTH_SHORT).show();
                     }

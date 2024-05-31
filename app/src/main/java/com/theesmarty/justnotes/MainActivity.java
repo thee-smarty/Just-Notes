@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        loadNotes(user.getUid());
+        if(user!=null)
+            loadNotes(user.getUid());
     }
 
     @Override
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Login Success!", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             if (user != null) {
+                                add.setEnabled(true);
                                 loadNotes(user.getUid());
                             }
                         } else {

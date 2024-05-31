@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(noteAdapter);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("YOUR_CLIENT_ID")
+                .requestIdToken("829993235030-j3negle747muq1jcc40rpn8of65bt9vv.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
@@ -82,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        loadNotes(user.getUid());
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

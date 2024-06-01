@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         noteList = new ArrayList<>();
         noteIds = new ArrayList<>();
-        noteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, noteList);
+        noteAdapter = new ArrayAdapter<>(this, R.layout.item_note, R.id.note_title, noteList);
         list.setAdapter(noteAdapter);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

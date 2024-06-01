@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private ArrayAdapter<String> noteAdapter;
     private List<String> noteList;
+    private List<String> noteIds;
 
     Button add;
     ListView list;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         info = findViewById(R.id.info);
 
         noteList = new ArrayList<>();
+        noteIds = new ArrayList<>();
         noteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, noteList);
         list.setAdapter(noteAdapter);
 
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         list.setOnItemClickListener((parent, view, position, id) -> {
-            String noteId = noteList.get(position);
+            String noteId = noteIds.get(position);
             Intent intent = new Intent(MainActivity.this, NoteActivity.class);
             intent.putExtra("noteId", noteId);
             startActivity(intent);
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user!=null)
+        if (user != null)
             loadNotes(user.getUid());
     }
 
@@ -130,9 +132,12 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         noteList.clear();
+                        noteIds.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String noteTitle = document.getString("title");
+                            String noteId = document.getId();
                             noteList.add(noteTitle);
+                            noteIds.add(noteId);
                         }
                         noteAdapter.notifyDataSetChanged();
 

@@ -2,9 +2,11 @@ package com.theesmarty.justnotes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("noteId", noteId);
             startActivity(intent);
         });
+
+        // Long press listener to show delete option
+        list.setOnItemLongClickListener((parent, view, position, id) -> {
+            showPopup(view, position);
+            return true;
+        });
     }
 
     @Override
@@ -153,5 +161,29 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Failed to load notes.", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void showPopup(View view, int position) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.getMenu().add("Delete").setOnMenuItemClickListener(item -> {
+            deleteNote(position);
+            return true;
+        });
+        popup.show();
+    }
+
+    private void deleteNote(int position) {
+        String noteId = noteIds.get(position);
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            firestore.collection("JustNotes").document(userId).collection("notes").document(noteId)
+                    .delete()
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(MainActivity.this, "Note deleted", Toast.LENGTH_SHORT).show();
+                        loadNotes(userId);
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Failed to delete note: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        }
     }
 }

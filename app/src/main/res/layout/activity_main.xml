@@ -48,10 +48,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="+ Add Note"
-        android:background="#171717"
+        android:backgroundTint="@color/black"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:enabled="false"
+        android:enabled="true"
         android:layout_alignParentBottom="true"
         />
 

@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-// TODO: 5/29/24 Test the functionality of the code
 public class NoteActivity extends AppCompatActivity {
     EditText title, content;
     private FirebaseFirestore firestore;
@@ -74,29 +73,33 @@ public class NoteActivity extends AppCompatActivity {
         String noteTitle = title.getText().toString();
         String noteContent = content.getText().toString();
 
-        if (TextUtils.isEmpty(noteTitle) && TextUtils.isEmpty(noteContent)) {
-            // If both fields are empty, do not save
-            return;
-        }
-
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             String userId = user.getUid();
-            Map<String, Object> note = new HashMap<>();
-            note.put("title", noteTitle);
-            note.put("content", noteContent);
-            note.put("noteId", System.currentTimeMillis());
-
             DocumentReference noteRef = firestore.collection("JustNotes").document(userId).collection("notes").document(noteId);
 
-            noteRef.set(note)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(this, "Note saved!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(this, "Failed to save note: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            if (TextUtils.isEmpty(noteTitle) && TextUtils.isEmpty(noteContent)) {
+                // If both fields are empty, delete the note
+                noteRef.delete().addOnSuccessListener(aVoid -> {
+                    Toast.makeText(NoteActivity.this, "Note deleted", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(NoteActivity.this, "Failed to delete note: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            } else {
+                // Otherwise, save the note
+                Map<String, Object> note = new HashMap<>();
+                note.put("title", noteTitle);
+                note.put("content", noteContent);
+                note.put("noteId", System.currentTimeMillis());
+
+                noteRef.set(note).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Note saved!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Failed to save note: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         } else {
             Toast.makeText(this, "User not authenticated.", Toast.LENGTH_SHORT).show();
         }

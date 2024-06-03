@@ -26,8 +26,11 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(noteAdapter);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("829993235030-j3negle747muq1jcc40rpn8of65bt9vv.apps.googleusercontent.com")
+                .requestIdToken("YOUR_CLIENT_ID")
                 .requestEmail()
                 .build();
 
@@ -141,9 +144,19 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         noteList.clear();
                         noteIds.clear();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String noteTitle = document.getString("title");
+                            String noteContent = document.getString("content");
                             String noteId = document.getId();
+                            if (noteTitle == null || noteTitle.isEmpty()) {
+                                if (noteContent != null && !noteContent.isEmpty()) {
+                                    String date = dateFormat.format(new Date(document.getLong("noteId")));
+                                    noteTitle = "No Title (" + date + ")";
+                                } else {
+                                    noteTitle = "No Title";
+                                }
+                            }
                             noteList.add(noteTitle);
                             noteIds.add(noteId);
                         }

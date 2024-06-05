@@ -152,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
                             if (noteTitle == null || noteTitle.isEmpty()) {
                                 if (noteContent != null && !noteContent.isEmpty()) {
                                     String date = dateFormat.format(new Date(document.getLong("noteId")));
-                                    noteTitle = "No Title (" + date + ")";
+                                    noteTitle = "Untitled (" + date + ")";
                                 } else {
-                                    noteTitle = "No Title";
+                                    noteTitle = "Untitled";
                                 }
                             }
                             noteList.add(noteTitle);

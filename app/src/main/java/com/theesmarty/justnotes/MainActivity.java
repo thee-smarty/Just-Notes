@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(noteAdapter);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("YOUR_CLIENT_ID")
+                .requestIdToken("829993235030-j3negle747muq1jcc40rpn8of65bt9vv.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 

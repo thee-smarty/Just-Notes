@@ -1,6 +1,6 @@
-# Just Notes
+# Just Notes [https://play.google.com/store/apps/details?id=com.theesmarty.justnotes]
 
-Welcome to the Just Notes Repository! 
+JustNotes is a simple notes app that allows users to securely create, edit, view, and delete notes. With Google Sign-In and cloud storage, users can access their notes from any device. The app features a clean and easy-to-use interface, making it ideal for quick note-taking.
 
 ## Features
 
